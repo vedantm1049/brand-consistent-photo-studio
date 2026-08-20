@@ -1,0 +1,8 @@
+interface:
+  display_name: "Cafe Picture Generator"
+  short_description: "Create consistent fresh beverage photography"
+  default_prompt: "Use $cafe-picture-generator to create a commercial picture for a new café beverage."
+
+policy:
+  allow_implicit_invocation: true
+
