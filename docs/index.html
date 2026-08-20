@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Build controlled commercial photography briefs for hot, iced, blended, protein and frozen café beverages." />
+    <meta property="og:title" content="Cafe Picture Generator" />
+    <meta property="og:description" content="Consistent beverage photography, from brief to production prompt." />
+    <meta property="og:type" content="website" />
+    <title>Cafe Picture Generator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="Cafe Picture Generator home">CPG<span>•</span></a>
+      <div class="topbar-center">Fresh beverage photography system</div>
+      <a class="github-link" href="https://github.com/vedantm1049/cafe-picture-generator">View GitHub ↗</a>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="eyebrow">Brief → controlled edit → QA</div>
+        <h1>Café pictures that stay<br />on brand. Every time.</h1>
+        <p>Build a production-ready brief for one hot, iced, blended, protein or frozen beverage—without letting the glass, camera or lighting drift.</p>
+        <div class="drink-line" aria-hidden="true">
+          <div class="drink hot"><span></span><b>01</b></div>
+          <div class="drink iced"><span></span><b>02</b></div>
+          <div class="drink frappe"><span></span><b>03</b></div>
+          <div class="drink protein"><span></span><b>04</b></div>
+          <div class="drink slush"><span></span><b>05</b></div>
+        </div>
+      </section>
+
+      <section class="demo" id="demo">
+        <div class="section-heading">
+          <div><span class="kicker">Live single-picture demo</span><h2>Build one controlled brief.</h2></div>
+          <p>Choose a format, describe only what changes, and get a production prompt plus a fixed quality-control checklist.</p>
+        </div>
+
+        <div class="workspace">
+          <form id="brief-form" class="brief-form">
+            <section class="form-section">
+              <span class="step">01</span>
+              <div class="grow">
+                <label>Drink format</label>
+                <div class="format-grid" id="format-grid">
+                  <button type="button" data-format="hot"><strong>Hot</strong><small>steam · crema · microfoam</small></button>
+                  <button type="button" data-format="iced" class="active"><strong>Iced</strong><small>clear ice · layers · condensation</small></button>
+                  <button type="button" data-format="frappe"><strong>Frappe</strong><small>viscosity · blended texture · topping</small></button>
+                  <button type="button" data-format="protein"><strong>Protein</strong><small>natural thickness · powder integration</small></button>
+                  <button type="button" data-format="slush"><strong>Slush</strong><small>fine crystals · translucency · gradient</small></button>
+                </div>
+                <div class="sample-row"><span>Load example:</span><button type="button" data-sample="hot">Hot</button><button type="button" data-sample="iced">Iced</button><button type="button" data-sample="frappe">Frappe</button><button type="button" data-sample="protein">Protein</button><button type="button" data-sample="slush">Slush</button></div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <span class="step">02</span>
+              <div class="two-column grow">
+                <div class="field"><label for="sku-name">SKU name</label><input id="sku-name" required /></div>
+                <div class="field"><label for="description">Short description</label><input id="description" required /></div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <span class="step">03</span>
+              <div class="two-column grow">
+                <div class="field"><label for="appearance">Visible drink appearance</label><textarea id="appearance" placeholder="Colour, opacity, layers, ice, foam or viscosity"></textarea></div>
+                <div class="field"><label for="top-treatment">Top treatment</label><textarea id="top-treatment" placeholder="None, microfoam, whipped cream..."></textarea></div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <span class="step">04</span>
+              <div class="grow">
+                <label>External garnishes</label>
+                <div class="three-column">
+                  <div class="field"><span>Left</span><input id="garnish-left" /></div>
+                  <div class="field"><span>Right</span><input id="garnish-right" /></div>
+                  <div class="field"><span>Back</span><input id="garnish-back" /></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <span class="step">05</span>
+              <div class="field grow"><label for="notes">Placement notes and exclusions</label><textarea id="notes" placeholder="Keep layers naturally uneven. No straw."></textarea></div>
+            </section>
+
+            <div class="form-actions">
+              <button class="primary" type="submit">Generate production prompt <span>→</span></button>
+              <button class="secondary" type="button" id="clear-button">Clear</button>
+            </div>
+          </form>
+
+          <aside class="output" aria-live="polite">
+            <div class="output-topline"><span>Production output</span><span id="status">Ready</span></div>
+            <div id="ready-output">
+              <div class="output-title"><span id="output-format">Iced</span><h3 id="output-name"></h3></div>
+              <pre id="prompt-output"></pre>
+              <div class="qa">
+                <h4>Fixed QA checks</h4>
+                <ul>
+                  <li>Vessel, angle, scale and crop unchanged</li>
+                  <li>Lighting, reflections and shadows preserved</li>
+                  <li>Drink physics match the selected format</li>
+                  <li>Garnishes match identity, zone and scale</li>
+                  <li>No unrequested objects, labels or logos</li>
+                </ul>
+              </div>
+              <div class="output-actions"><button type="button" id="copy-button">Copy prompt</button><button type="button" id="download-button">Download JSON</button></div>
+            </div>
+            <div id="draft-output" hidden><div class="mini-cup"><span></span></div><h3>Your prompt will appear here.</h3><p>Complete the visible product decisions, then generate the production prompt.</p></div>
+          </aside>
+        </div>
+        <p class="demo-note">This public demo prepares the controlled production brief. Final image creation runs through the repository skill with rights-cleared source photographs and a compatible image model.</p>
+      </section>
+
+      <section class="principles">
+        <div><span class="kicker">What the agent controls</span><h2>Change the drink.<br />Lock the photograph.</h2></div>
+        <div class="principle-list">
+          <article><span>01</span><h3>Original source every time</h3><p>Each SKU begins from the approved source for its format. Generated pictures never become templates.</p></article>
+          <article><span>02</span><h3>Only visible decisions</h3><p>The intake asks about appearance and props—not sweetness, recipes or invisible ingredients.</p></article>
+          <article><span>03</span><h3>Reject visual drift</h3><p>A beautiful result still fails if the vessel, camera, lighting, crop or shadow changes.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><div><strong>Cafe Picture Generator</strong><span>Open, brand-neutral demonstration</span></div><a href="https://github.com/vedantm1049/cafe-picture-generator">Explore the repository ↗</a></footer>
+    <script src="./app.js"></script>
+  </body>
+</html>
+
