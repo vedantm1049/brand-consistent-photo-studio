@@ -2,6 +2,10 @@
 
 An agent workflow for creating consistent commercial pictures of fresh café beverages from approved source photographs.
 
+**[Try the live single-picture demo](https://cafe-picture-generator-demo.harshabiyani.chatgpt.site)**
+
+The browser demo accepts one beverage brief, supports all five formats, and produces the controlled image-editing prompt and quality-control checklist. It does not call a paid image model or expose an API key in the browser. Actual image creation runs through the skill in a compatible agent environment.
+
 It supports hot drinks, iced drinks, frappes and milkshakes, protein drinks, and slushies. The system treats every request as a controlled edit. The vessel, camera, lighting, background, crop, and shadows stay fixed while the drink and approved ingredient props change.
 
 ## Why this exists
@@ -86,6 +90,11 @@ Place mango slices on the left and a small glass bowl of matcha powder on the ri
 
 For an incomplete request, the agent collects only the visible decisions needed for the photograph. It does not interrogate the user about the recipe, sweetness, or ingredients that cannot be seen.
 
+## One picture or a full menu
+
+- **One picture:** provide a drink name and description. The skill collects any missing visible decisions and generates one final PNG.
+- **Full menu:** provide a validated CSV. Each row starts independently from the original source asset for its format.
+
 ## Batch use
 
 The validator checks required fields, supported formats, duplicate SKU names, output filenames, and garnish conflicts.
@@ -109,4 +118,3 @@ Blank garnish cells normalize to `none`. If `output_filename` is blank, the vali
 ## Project boundary
 
 This public repository is a brand-neutral implementation. It does not contain employer-owned photographs, logos, menus, sales data, or internal operating documents. Users must provide source images that they own or have permission to use.
-
