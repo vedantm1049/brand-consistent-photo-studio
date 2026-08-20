@@ -2,7 +2,7 @@
 
 An agent workflow for creating consistent commercial pictures of fresh café beverages from approved source photographs.
 
-**[Try the live single-picture demo](https://vedantm1049.github.io/cafe-picture-generator/)**
+**[Try the live single-picture demo](https://cafe-picture-generator-demo.harshabiyani.chatgpt.site)**
 
 The browser demo accepts one beverage brief, supports all five formats, and produces the controlled image-editing prompt and quality-control checklist. It does not call a paid image model or expose an API key in the browser. Actual image creation runs through the skill in a compatible agent environment.
 
