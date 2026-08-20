@@ -57,7 +57,7 @@ function renderOutput() {
   byId("status").style.background = "#d8ff45";
 }
 
-document.querySelectorAll("[data-format]").forEach((button) => button.addEventListener("click", () => { selectedFormat = button.dataset.format; document.querySelectorAll("[data-format]").forEach((item) => item.classList.toggle("active", item === button)); setDraft(); }));
+document.querySelectorAll("[data-format]").forEach((button) => button.addEventListener("click", () => loadSample(button.dataset.format)));
 document.querySelectorAll("[data-sample]").forEach((button) => button.addEventListener("click", () => loadSample(button.dataset.sample)));
 Object.values(fields).forEach((id) => byId(id).addEventListener("input", setDraft));
 byId("brief-form").addEventListener("submit", (event) => { event.preventDefault(); renderOutput(); });
@@ -67,4 +67,3 @@ byId("download-button").addEventListener("click", () => { const blob = new Blob(
 
 loadSample("iced");
 renderOutput();
-
