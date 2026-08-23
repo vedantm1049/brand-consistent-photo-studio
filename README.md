@@ -1,4 +1,4 @@
-# Cafe Picture Generator
+# Brand-Consistent Photo Studio
 
 An agent workflow for creating consistent commercial pictures of fresh café beverages from approved source photographs.
 
