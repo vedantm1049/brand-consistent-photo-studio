@@ -1,9 +1,9 @@
 ---
-name: cafe-picture-generator
-description: Create or revise consistent commercial pictures of fresh café beverages from locked source photographs. Use for hot, iced, frappe, protein-drink, and slush SKUs; single-drink intake; CSV batches; or targeted picture corrections. Do not use for packaged drinks, food, logos, posters, or full scene redesigns.
+name: brand-consistent-photo-studio
+description: Create or revise brand-consistent commercial pictures of fresh café beverages from locked source photographs. Use for hot, iced, frappe, protein-drink, and slush SKUs; single-drink intake; CSV batches; or targeted picture corrections. Do not use for packaged drinks, food, logos, posters, or full scene redesigns.
 ---
 
-# Cafe Picture Generator
+# Brand-Consistent Photo Studio
 
 Treat each request as a controlled edit of an approved source photograph. Do not create a new composition when a matching source format exists.
 
@@ -57,6 +57,20 @@ Treat `none` as an intentionally empty garnish zone.
 
 Use `scripts/validate_sheet.py` for CSV validation and normalization before generation.
 
+## Visual consistency contract
+
+A result does not pass just because it looks attractive. Compare it with the approved source and reject material drift in:
+
+- vessel identity, proportions and placement;
+- camera angle, perspective and scale;
+- framing, crop and white space;
+- background, lighting, reflections and shadows;
+- requested beverage physics and layer structure;
+- garnish identity, placement zone and scale;
+- unrequested text, logos, utensils or props.
+
+When a result fails, correct it from the original source photograph plus the full approved brief. Do not compound drift by using the failed render as the next source.
+
 ## Filenames
 
 Unless the user supplies `output_filename`, derive it from the exact SKU name:
@@ -76,4 +90,3 @@ Examples:
 ## Correction workflow
 
 Change only the named element. Rebuild the corrected image from the original source asset plus the full approved brief. Do not edit a failed render unless the user explicitly asks to preserve a unique feature that exists only in that render.
-
