@@ -3,8 +3,7 @@
 Generate brand-consistent F&B listing photography across an entire beverage menu without reshooting every SKU.
 
 <img width="432" height="432" alt="download" src="https://github.com/user-attachments/assets/f425c834-d963-406d-a876-1009e235bbdb" />
-
-![One approved iced-drink source photo transformed into multiple brand-consistent beverage SKUs while keeping vessel, camera, lighting, crop and background fixed.] 
+One approved iced-drink source photo transformed into multiple brand-consistent beverage SKUs while keeping vessel, camera, lighting, crop and background fixed.
 
 **[Try the live production-brief demo](https://vedantm1049.github.io/brand-consistent-photo-studio/)**
 
