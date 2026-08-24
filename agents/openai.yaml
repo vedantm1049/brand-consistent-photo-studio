@@ -1,8 +1,7 @@
 interface:
-  display_name: "Cafe Picture Generator"
-  short_description: "Create consistent fresh beverage photography"
-  default_prompt: "Use $cafe-picture-generator to create a commercial picture for a new café beverage."
+  display_name: "Brand-Consistent Photo Studio"
+  short_description: "Generate brand-consistent F&B listing photography"
+  default_prompt: "Use $brand-consistent-photo-studio to create a controlled commercial listing image for a new café beverage."
 
 policy:
   allow_implicit_invocation: true
-
