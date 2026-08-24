@@ -2,13 +2,28 @@
 
 Generate brand-consistent F&B listing photography across an entire beverage menu without reshooting every SKU.
 
+![One approved iced-drink source photo transformed into multiple brand-consistent beverage SKUs while keeping vessel, camera, lighting, crop and background fixed.](docs/assets/brand-consistent-photo-studio-hero.gif)
+
 **[Try the live production-brief demo](https://vedantm1049.github.io/brand-consistent-photo-studio/)**
 
-The core idea is simple: start from an approved brand photograph, change only the beverage and approved props, and keep the vessel, camera, lighting, background, framing and shadows locked.
+**One approved source photograph. Multiple SKUs. The drink changes; the visual system does not.**
 
-The result is a repeatable production workflow for hot drinks, iced drinks, frappes and milkshakes, protein drinks and slushies — designed for marketplace listings, digital menus and restaurant-owned channels.
+The Studio treats image generation as a controlled edit: vessel, camera, lighting, background, framing, crop and shadows stay locked while the beverage and approved ingredient props change.
 
 > **Public demo boundary:** the browser demo builds the controlled production brief and fixed QA contract. It does not expose a paid image-model key in the browser. Actual image editing runs through the repository skill in an image-capable agent environment using rights-cleared source photographs.
+
+## What the hero example shows
+
+The hero GIF starts with one approved **Iced Spanish Latte** source photograph and uses that same iced-format visual system to create four distinct SKUs:
+
+- Mango Matcha Latte
+- Strawberry Matcha Latte
+- Hibiscus Watermelon Iced Tea
+- Iced Mocha
+
+Every variant starts from the same approved source image rather than from a previous generation. The glass, camera angle, framing, crop, background, lighting and shadows are intended to remain fixed while only the beverage and supporting ingredient props change.
+
+That is the core product idea: **scale a visual identity across a menu without letting AI generation slowly redesign the photograph.**
 
 ## The problem
 
