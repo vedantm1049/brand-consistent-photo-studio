@@ -1,66 +1,124 @@
 # Brand-Consistent Photo Studio
 
-An agent workflow for creating consistent commercial pictures of fresh café beverages from approved source photographs.
+Generate brand-consistent F&B listing photography across an entire beverage menu without reshooting every SKU.
 
-**[Try the live single-picture demo](https://vedantm1049.github.io/brand-consistent-photo-studio/)**
+**[Try the live production-brief demo](https://vedantm1049.github.io/brand-consistent-photo-studio/)**
 
-The browser demo accepts one beverage brief, supports all five formats, and produces the controlled image-editing prompt and quality-control checklist. It does not call a paid image model or expose an API key in the browser. Actual image creation runs through the skill in a compatible agent environment.
+The core idea is simple: start from an approved brand photograph, change only the beverage and approved props, and keep the vessel, camera, lighting, background, framing and shadows locked.
 
-It supports hot drinks, iced drinks, frappes and milkshakes, protein drinks, and slushies. The system treats every request as a controlled edit. The vessel, camera, lighting, background, crop, and shadows stay fixed while the drink and approved ingredient props change.
+The result is a repeatable production workflow for hot drinks, iced drinks, frappes and milkshakes, protein drinks and slushies — designed for marketplace listings, digital menus and restaurant-owned channels.
 
-## Why this exists
+> **Public demo boundary:** the browser demo builds the controlled production brief and fixed QA contract. It does not expose a paid image-model key in the browser. Actual image editing runs through the repository skill in an image-capable agent environment using rights-cleared source photographs.
 
-Traditional menu photography is slow to repeat when a café launches many SKUs. Uncontrolled image generation is faster, but it often changes the glass, angle, reflections, scale, or composition.
+## The problem
 
-Cafe Picture Generator adds a production layer between the product brief and the image model:
+A café can photograph one SKU beautifully and still struggle to scale that visual identity across 20, 40 or 100 menu items. Traditional reshoots are slow and expensive. Uncontrolled image generation is fast, but often changes the glass, camera angle, crop, reflections, lighting or scale from one SKU to the next.
 
-- structured intake for incomplete briefs;
-- a locked source photograph for each drink format;
-- precise control of drink appearance, toppings, and external garnishes;
-- batch input through CSV;
-- pre-generation validation;
-- visual quality checks and targeted correction;
+Brand-Consistent Photo Studio treats generation as a **controlled image-editing system**, not a fresh composition task.
+
+It adds a production layer between the product brief and the image model:
+
+- one locked source photograph per beverage format;
+- structured intake focused only on visible product decisions;
+- explicit controls for drink appearance, toppings and external props;
+- deterministic CSV validation for full-menu batches;
+- a visual QA contract that rejects brand drift;
+- targeted correction from the original source rather than from failed generations;
 - predictable filenames and clean final-output folders.
+
+## One source photo → an entire menu
+
+For every SKU, the system preserves:
+
+**Locked:** vessel · position · camera angle · framing · white space · background · lighting · reflections · shadows · crop
+
+**Allowed to change:** beverage · ice/layers/foam/viscosity · top treatment · approved ingredient props
+
+Each generated SKU starts again from the original approved source photograph. Generated outputs never become templates for the next SKU, preventing visual drift from compounding across a menu.
 
 ## Supported formats
 
-| Format | Typical products | Important visual cues |
+| Format | Typical products | Visual controls |
 | --- | --- | --- |
 | Hot | Coffee, tea, chocolate | Steam, crema, microfoam, ceramic vessel |
 | Iced | Iced coffee, matcha, lemonade | Clear ice, condensation, liquid layers |
 | Frappe | Frappes, milkshakes | Viscosity, blended texture, whipped topping |
-| Protein | Protein shakes and functional drinks | Natural thickness, powder integration, restrained foam |
-| Slush | Slushies and frozen coolers | Fine ice crystals, translucency, colour gradients |
+| Protein | Protein shakes, functional drinks | Natural thickness, powder integration, restrained foam |
+| Slush | Slushies, frozen coolers | Fine ice crystals, translucency, colour gradients |
 
-## Workflow
+## Production workflow
 
 ```mermaid
 flowchart TD
-    A["Drink brief"] --> B["Structured intake"]
-    B --> C["Select source format"]
+    A["SKU brief / CSV"] --> B["Validate visible decisions"]
+    B --> C["Select locked source format"]
     C --> D["Controlled image edit"]
-    D --> E["Visual quality check"]
-    E -->|Pass| F["Final PNG"]
-    E -->|Fail| G["Targeted correction"]
-    G --> C
+    D --> E["Visual consistency QA"]
+    E -->|Pass| F["Final listing image"]
+    E -->|Fail| G["Targeted correction from source"]
+    G --> D
 ```
 
-## Repository contents
+The QA layer checks whether the result is not merely attractive, but **consistent with the approved visual system**: vessel, angle, scale, crop, lighting, shadows, drink physics and prop placement.
+
+## Browser demo vs production workflow
+
+The public GitHub Pages demo intentionally stops before paid image generation.
+
+**Browser demo**
+- choose one of five drink formats;
+- describe the visible beverage and props;
+- generate the exact controlled-edit instruction;
+- inspect the fixed QA checklist;
+- export the structured brief as JSON.
+
+**Agent workflow**
+- takes a rights-cleared source photograph;
+- performs the controlled image edit;
+- evaluates the result against the production specification;
+- rejects visual drift;
+- corrects failed outputs from the original source;
+- supports both one-off images and validated full-menu batches.
+
+## Example request
+
+```text
+Create an Iced Mango Matcha Latte.
+Show a distinct mango base, milk in the middle and matcha on top.
+Place ripe mango slices on the left and a small clear bowl of matcha powder on the right.
+Keep the source glass, camera, lighting, framing and background unchanged.
+```
+
+For incomplete requests, the workflow asks only for decisions that can actually be seen in the final photograph. It does not ask about sweetness, recipes or invisible ingredients.
+
+## Batch use
+
+A full menu can be supplied as CSV. The validator checks required fields, supported formats, duplicate SKU names, output filenames and garnish conflicts before generation begins.
+
+```bash
+python scripts/validate_sheet.py assets/cafe-sku-template.csv
+python scripts/validate_sheet.py menu.csv --write-normalized normalized-menu.csv
+```
+
+Blank garnish cells normalize to `none`. If `output_filename` is blank, the validator derives a lowercase kebab-case PNG filename from `sku_name`.
+
+## Repository structure
 
 ```text
 SKILL.md                         Agent workflow
 agents/openai.yaml               Skill interface metadata
-references/production-spec.md   Image-editing and QA contract
+references/production-spec.md   Image-editing and visual-QA contract
 references/sheet-schema.md      Batch CSV specification
 assets/cafe-sku-template.csv    Example five-format batch
 scripts/validate_sheet.py       Deterministic CSV validator
 tests/test_validate_sheet.py    Validator tests
 examples/sample-briefs.md       Single-SKU brief examples
+docs/                            Live browser demo
 ```
 
 ## Quick start
 
-1. Clone this repository.
+1. Clone the repository.
 2. Add one approved, rights-cleared source photograph for each format you plan to use:
 
 ```text
@@ -71,50 +129,19 @@ assets/source-protein.png
 assets/source-slush.png
 ```
 
-3. Validate the example batch:
-
-```bash
-python scripts/validate_sheet.py assets/cafe-sku-template.csv
-```
-
-4. Install or load the repository as an agent skill in an environment with image-editing capability.
-5. Ask it to create one beverage from a name and description, or provide a CSV that follows the batch schema.
-
-## Example request
-
-```text
-Create an Iced Mango Matcha Latte.
-It should have a distinct mango base, milk in the middle, and matcha on top.
-Place mango slices on the left and a small glass bowl of matcha powder on the right.
-```
-
-For an incomplete request, the agent collects only the visible decisions needed for the photograph. It does not interrogate the user about the recipe, sweetness, or ingredients that cannot be seen.
-
-## One picture or a full menu
-
-- **One picture:** provide a drink name and description. The skill collects any missing visible decisions and generates one final PNG.
-- **Full menu:** provide a validated CSV. Each row starts independently from the original source asset for its format.
-
-## Batch use
-
-The validator checks required fields, supported formats, duplicate SKU names, output filenames, and garnish conflicts.
-
-```bash
-python scripts/validate_sheet.py menu.csv
-python scripts/validate_sheet.py menu.csv --write-normalized normalized-menu.csv
-```
-
-Blank garnish cells normalize to `none`. If `output_filename` is blank, the validator derives a lowercase kebab-case PNG name from `sku_name`.
+3. Validate your brief or batch.
+4. Load the repository as an agent skill in an environment with image-editing capability.
+5. Generate one SKU or run a full validated menu batch.
 
 ## Design principles
 
 - Start every SKU from its original approved source photograph.
-- Never use one generated SKU as the source for another.
-- Change only the beverage, requested top treatment, and approved external garnishes.
-- Reject visual drift instead of accepting a merely attractive result.
+- Never chain one generated SKU into the next.
+- Change only the beverage, top treatment and approved external props.
+- Reject visual drift rather than accepting a merely attractive result.
 - Correct failed images from the original source to avoid compounding errors.
-- Keep final folders free of failed and superseded generations.
+- Keep production outputs deterministic, inspectable and easy to hand off.
 
 ## Project boundary
 
-This public repository is a brand-neutral implementation. It does not contain employer-owned photographs, logos, menus, sales data, or internal operating documents. Users must provide source images that they own or have permission to use.
+This public repository is a brand-neutral implementation. It contains no employer-owned photographs, logos, menus, sales data or internal operating documents. Users must provide source images that they own or have permission to use.
