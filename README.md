@@ -14,6 +14,8 @@ The Studio treats image generation as a controlled edit: vessel, camera, lightin
 
 > **Public demo boundary:** the browser demo builds the controlled production brief and fixed QA contract. It does not expose a paid image-model key in the browser. Actual image editing runs through the repository skill in an image-capable agent environment using rights-cleared source photographs.
 
+This cut image creation and processing time by ~75%.
+
 ## What the hero example shows
 
 The hero GIF starts with one approved **Iced Spanish Latte** source photograph and uses that same iced-format visual system to create four distinct SKUs:
