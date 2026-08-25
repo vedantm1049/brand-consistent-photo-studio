@@ -162,3 +162,7 @@ assets/source-slush.png
 ## Project boundary
 
 This public repository is a brand-neutral implementation. It contains no employer-owned photographs, logos, menus, sales data or internal operating documents. Users must provide source images that they own or have permission to use.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
