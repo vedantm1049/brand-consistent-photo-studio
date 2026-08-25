@@ -1,5 +1,7 @@
 # Brand-Consistent Photo Studio
 
+![Tests](https://github.com/vedantm1049/brand-consistent-photo-studio/actions/workflows/tests.yml/badge.svg)
+
 Generate brand-consistent F&B listing photography across an entire beverage menu without reshooting every SKU.
 
 <img width="432" height="432" alt="download" src="https://github.com/user-attachments/assets/f425c834-d963-406d-a876-1009e235bbdb" />
