@@ -10,6 +10,8 @@ One approved iced-drink source photo transformed into multiple brand-consistent 
 
 **[Try the live production-brief demo](https://vedantm1049.github.io/brand-consistent-photo-studio/)**
 
+**[Read the product decisions](product-decisions.md)** — why reference-image editing beat generation-from-scratch, and the AED 4,000/40-SKU reshoot baseline this replaced.
+
 **One approved source photograph. Multiple SKUs. The drink changes; the visual system does not.**
 
 The Studio treats image generation as a controlled edit: vessel, camera, lighting, background, framing, crop and shadows stay locked while the beverage and approved ingredient props change.
